@@ -4,7 +4,7 @@ module Api
       before_action :set_expense, only: [:update, :destroy]
 
       def index
-        expenses = Expense.all
+        expenses = current_user.expenses
         render json: expenses
       end
 
@@ -13,6 +13,7 @@ module Api
         # test category
         # later category_id will be sending from client
         expense.category_id = 1
+        expense.user = current_user
         if expense.save
           render json: expense, status: :created
         else
