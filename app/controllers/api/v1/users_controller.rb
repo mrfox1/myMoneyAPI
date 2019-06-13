@@ -5,7 +5,7 @@ module Api
         @user = User.new(user_params)
         @user.email.downcase
         if @user.save
-          @user
+          render json: @user, status: :created
         else
           render_error(user.errors.full_messages[0], :unprocessable_entity)
         end
