@@ -1,7 +1,7 @@
 module Api
   module V1
     class UsersController < ApiController
-      skip_before_action :auth_with_token!, only: :logout
+      skip_before_action :auth_with_token!, only: [:create, :login]
 
       def create
         @user = User.new(user_params)
