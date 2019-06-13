@@ -4,13 +4,14 @@ module Api
       before_action :set_income, only: [:update, :destroy]
 
       def index
-        incomes = Income.all
+        incomes = current_user.incomes
         render json: incomes
       end
 
       def create
         income = Income.new(income_params)
         income.category_id = 1
+        income.user = current_user
         if income.save
           render json: income, status: :created
         else
