@@ -1,6 +1,7 @@
 module Api
   module V1
     class ApiController < ApplicationController
+      before_action :auth_with_token!
 
       def render_error(message, status)
         status_code = Rack::Utils::SYMBOL_TO_STATUS_CODE[status]
