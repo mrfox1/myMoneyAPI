@@ -26,7 +26,6 @@ module Api
         @user = User.find_by_email(params[:user][:email].downcase)
         if @user && @user.authenticate(params[:user][:password])
           @user.regenerate_token
-          @user
         else
           head :not_found
         end
