@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   namespace :api, defaults: { format: :json} do
     namespace :v1 do
-      resources :incomes, except: [:show, :edit]
-      resources :expenses, except: [:show, :edit]
+      resources :categories, except: [:new, :edit]
+      resources :incomes, except: [:show, :new, :edit]
+      resources :expenses, except: [:show, :new, :edit]
       resources :users, only: [:create, :update]
       post 'users/login'
       get 'users/logout'
