@@ -1,7 +1,7 @@
 module Api
   module V1
     class CategoriesController < ApiController
-      before_action :set_category, except: :index
+      before_action :set_category, except: [:index, :create]
 
       def index
         categories = current_user.categories.order(:name)
