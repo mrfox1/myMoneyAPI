@@ -1,4 +1,6 @@
 class Category < ApplicationRecord
+  CATEGORY_TYPES = %w{Expense Income}
+
   has_many :incomes
   has_many :expenses
 
