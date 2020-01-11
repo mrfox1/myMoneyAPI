@@ -10,7 +10,6 @@ module Api
 
       def create
         income = Income.new(income_params)
-        income.category_id = 1
         income.user = current_user
         if income.save
           render json: income, status: :created
@@ -35,7 +34,7 @@ module Api
       private
 
       def income_params
-        params.require(:income).permit(:sum, :date, :description)
+        params.require(:income).permit(:sum, :date, :description, :category_id)
       end
 
       def set_income
