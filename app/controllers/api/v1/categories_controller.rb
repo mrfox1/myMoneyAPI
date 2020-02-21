@@ -4,8 +4,8 @@ module Api
       before_action :set_category, except: [:index, :create]
 
       def index
-        categories = current_user.categories.order(:name)
-        render json: categories
+        @categories = current_user.categories.order(:name)
+        render json: @categories
       end
 
       def show
