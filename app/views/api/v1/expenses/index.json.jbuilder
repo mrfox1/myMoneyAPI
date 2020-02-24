@@ -1,4 +1,4 @@
-json @expenses do |expense|
+json.expenses @expenses do |expense|
   json.id expense.id
   json.sum expense.sum
   json.date expense.date
