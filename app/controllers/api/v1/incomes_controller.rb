@@ -4,8 +4,7 @@ module Api
       before_action :set_income, only: [:update, :destroy]
 
       def index
-        incomes = current_user.incomes
-        render json: incomes
+        @incomes = current_user.incomes.includes(:category)
       end
 
       def create

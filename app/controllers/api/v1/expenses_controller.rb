@@ -4,8 +4,7 @@ module Api
       before_action :set_expense, only: [:update, :destroy]
 
       def index
-        expenses = current_user.expenses
-        render json: expenses
+        @expenses = current_user.expenses.includes(:category)
       end
 
       def create
