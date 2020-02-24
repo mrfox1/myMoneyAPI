@@ -22,7 +22,7 @@ module Api
 
       def update
         if @expense.update(expense_params)
-          render json: @expense
+          @expense
         else
           render_error(@expense.errors.full_messages[0], :unprocessable_entity)
         end

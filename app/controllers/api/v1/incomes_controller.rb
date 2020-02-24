@@ -19,7 +19,7 @@ module Api
 
       def update
         if @income.update(income_params)
-          render json: @income
+          @income
         else
           render_error(@income.errors.full_messages[0], :unprocessable_entity)
         end
