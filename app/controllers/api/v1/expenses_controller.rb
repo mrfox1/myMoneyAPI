@@ -9,9 +9,6 @@ module Api
 
       def create
         expense = Expense.new(expense_params)
-        # test category
-        # later category_id will be sending from client
-        expense.category_id = 1
         expense.user = current_user
         if expense.save
           render json: expense, status: :created
@@ -40,7 +37,7 @@ module Api
       end
 
       def expense_params
-        params.require(:expense).permit(:sum, :date, :description)
+        params.require(:expense).permit(:sum, :date, :description, :category_id)
       end
     end
   end
