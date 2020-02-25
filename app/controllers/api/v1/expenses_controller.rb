@@ -8,12 +8,12 @@ module Api
       end
 
       def create
-        expense = Expense.new(expense_params)
-        expense.user = current_user
-        if expense.save
-          render json: expense, status: :created
+        @expense = Expense.new(expense_params)
+        @expense.user = current_user
+        if @expense.save
+          render json: @expense, status: :created
         else
-          render_error(expense.errors.full_messages[0], :unprocessable_entity)
+          render_error(@expense.errors.full_messages[0], :unprocessable_entity)
         end
       end
 
