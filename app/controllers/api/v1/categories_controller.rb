@@ -5,7 +5,6 @@ module Api
 
       def index
         @categories = current_user.categories.order(:name)
-        render json: @categories
       end
 
       def show

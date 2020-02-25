@@ -4,23 +4,22 @@ module Api
       before_action :set_income, only: [:update, :destroy]
 
       def index
-        incomes = current_user.incomes
-        render json: incomes
+        @incomes = current_user.incomes.includes(:category)
       end
 
       def create
-        income = Income.new(income_params)
-        income.user = current_user
-        if income.save
-          render json: income, status: :created
+        @income = Income.new(income_params)
+        @income.user = current_user
+        if @income.save
+          render json: @income, status: :created
         else
-          render_error(income.errors.full_messages[0], :unprocessable_entity)
+          render_error(@income.errors.full_messages[0], :unprocessable_entity)
         end
       end
 
       def update
         if @income.update(income_params)
-          render json: @income
+          @income
         else
           render_error(@income.errors.full_messages[0], :unprocessable_entity)
         end

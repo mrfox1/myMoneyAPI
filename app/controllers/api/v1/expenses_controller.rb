@@ -4,26 +4,22 @@ module Api
       before_action :set_expense, only: [:update, :destroy]
 
       def index
-        expenses = current_user.expenses
-        render json: expenses
+        @expenses = current_user.expenses.includes(:category)
       end
 
       def create
-        expense = Expense.new(expense_params)
-        # test category
-        # later category_id will be sending from client
-        expense.category_id = 1
-        expense.user = current_user
-        if expense.save
-          render json: expense, status: :created
+        @expense = Expense.new(expense_params)
+        @expense.user = current_user
+        if @expense.save
+          render json: @expense, status: :created
         else
-          render_error(expense.errors.full_messages[0], :unprocessable_entity)
+          render_error(@expense.errors.full_messages[0], :unprocessable_entity)
         end
       end
 
       def update
         if @expense.update(expense_params)
-          render json: @expense
+          @expense
         else
           render_error(@expense.errors.full_messages[0], :unprocessable_entity)
         end
@@ -41,7 +37,7 @@ module Api
       end
 
       def expense_params
-        params.require(:expense).permit(:sum, :date, :description)
+        params.require(:expense).permit(:sum, :date, :description, :category_id)
       end
     end
   end
