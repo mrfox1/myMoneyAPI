@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   #   namespace :v1 do
   #     resources :categories, except: [:new, :edit]
   #     resources :incomes, except: [:show, :new, :edit]
-  #     resources :expenses, except: [:show, :new, :edit]
   #   end
   # end
 end
