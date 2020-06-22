@@ -46,20 +46,15 @@ module MyMoney
 
         desc "Update users data"
         params do
-          requires :token, type: String
           requires :user, type: Hash do
             optional :name, type: String
             optional :email, type: String
             optional :password, type: String
           end
         end
-        put ":token" do
-          user = User.find_by(token: params[:token])
-          if user.update(params[:user])
-            present user, with: MyMoney::Entities::User
-          else
-            error!('Unauthorized. Invalid or expired token.', 401)
-          end
+        put do
+          current_user.update!(params[:user])
+          present current_user, with: MyMoney::Entities::User
         end
       end
     end
