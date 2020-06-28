@@ -41,6 +41,7 @@ module MyMoney
           present category, with: MyMoney::Entities::Categories::Category
         end
 
+        #TODO: 1. Delete nested records if change record_type
         desc "Update the category"
         params do
           requires :category, type: Hash do
