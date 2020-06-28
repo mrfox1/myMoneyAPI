@@ -5,6 +5,7 @@ module MyMoney
     format :json
     helpers Helpers::Authenticate
 
+    mount MyMoney::V1::Categories
     mount MyMoney::V1::Expenses
     mount MyMoney::V1::Users
   end
