@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   # TODO: add the following routes
   # namespace :api, defaults: { format: :json} do
   #   namespace :v1 do
-  #     resources :categories, except: [:new, :edit]
   #     resources :incomes, except: [:show, :new, :edit]
   #   end
   # end
