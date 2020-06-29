@@ -34,7 +34,7 @@ module MyMoney
           end
         end
         post do
-          check_category!(params[:expense][:category_id], "Income")
+          check_category!(params[:income][:category_id], "Income")
           income = current_user.incomes.create!(params[:income])
           present income, with: MyMoney::Entities::Income
         end
@@ -50,7 +50,7 @@ module MyMoney
         end
         route_param :id do
           put do
-            check_category!(params[:expense][:category_id], "Income")
+            check_category!(params[:income][:category_id], "Income")
             income = current_user.incomes.find_by(id: params[:id])
             return error!("Record was not found", 404) if income.nil?
             income.update!(params[:expense])
