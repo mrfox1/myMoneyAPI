@@ -7,6 +7,7 @@ module MyMoney
 
     mount MyMoney::V1::Categories
     mount MyMoney::V1::Expenses
+    mount MyMoney::V1::Incomes
     mount MyMoney::V1::Users
   end
 end
