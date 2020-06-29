@@ -51,9 +51,9 @@ module MyMoney
         end
         route_param :id do
           put do
+            check_category!(params[:id])
             category = current_user.categories.find_by(id: params[:id])
-            return error!("Record was not found", 404) if category.nil?
-            category.update(params[:category])
+            category.update!(params[:category])
             present category, with: MyMoney::Entities::Categories::Category
           end
         end
