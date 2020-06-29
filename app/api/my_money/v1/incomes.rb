@@ -34,9 +34,7 @@ module MyMoney
           end
         end
         post do
-          category = current_user.categories.find_by(id: params[:income][:category_id])
-          return error!("Record was not found", 404) if category.nil?
-          return error!('Unauthorized or invalid category.', 401) unless category.record_type == "Income"
+          check_category!(params[:expense][:category_id], "Income")
           income = current_user.incomes.create!(params[:income])
           present income, with: MyMoney::Entities::Income
         end
@@ -52,10 +50,9 @@ module MyMoney
         end
         route_param :id do
           put do
-            category = current_user.categories.find_by(id: params[:income][:category_id])
+            check_category!(params[:expense][:category_id], "Income")
             income = current_user.incomes.find_by(id: params[:id])
-            return error!("Record was not found", 404) if income.nil? || category.nil?
-            return error!('Unauthorized or invalid category.', 401) unless category.record_type == "Income"
+            return error!("Record was not found", 404) if income.nil?
             income.update!(params[:expense])
             present income, with: MyMoney::Entities::Income
           end

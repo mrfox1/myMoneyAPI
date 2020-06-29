@@ -3,7 +3,7 @@ module MyMoney
     prefix :api
     version 'v1', using: :path
     format :json
-    helpers Helpers::Authenticate
+    helpers Helpers::Authenticate, Helpers::Permissions
 
     mount MyMoney::V1::Categories
     mount MyMoney::V1::Expenses
